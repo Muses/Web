@@ -1,0 +1,17 @@
+doctype 5
+html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='mWeb')
+	head
+		meta(charset='utf-8')
+		title(ng-bind='app.title')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet', href='/styles/application.css')
+		link(rel='shortcut icon', href='/icons/favicon.ico')
+		script(type='text/javascript').
+			function mConfigCallback() {
+				return !{ JSON.stringify(app || {}) };
+			}
+	body
+		block header
+
+		block body
+			h1 This is the body.

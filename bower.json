@@ -1,0 +1,17 @@
+{
+  "name": "Muses Web",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "angular": "~1.0.7",
+    "angular-ui-router": "~0.0.1",
+    "json3": "~3.2.5",
+    "html5shiv": "~3.6.2",
+    "es5-shim": "~2.1.0",
+    "bootstrap": "~3.0.0"
+  }
+}
