@@ -2,8 +2,9 @@ doctype 5
 html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='mWeb')
 	head
 		meta(charset='utf-8')
-		title(ng-bind='app.title')
+		title(ng-bind='app.title')= app.title
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 		link(rel='stylesheet', href='/styles/application.css')
 		link(rel='shortcut icon', href='/icons/favicon.ico')
 		script(type='text/javascript').
@@ -11,7 +12,52 @@ html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='mWeb')
 				return !{ JSON.stringify(app || {}) };
 			}
 	body
-		block header
-
-		block body
-			h1 This is the body.
+		.container
+			block header
+				.row
+					.col-lg-12
+						.navbar
+							a.navbar-brand(href='#') Title
+							ul.nav.navbar-nav
+								li.active
+									a(href='#') Home
+								li
+									a(href='#') Link
+								li
+									a(href='#') Link
+			block body
+				.row
+					.col-lg-12
+						.jumbotron
+							h1 Hello, world!
+							p This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+							a.btn.btn-primary.btn-large Learn more
+				.row
+					.col-lg-4
+						h2 Heading
+						p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+						p
+							a.btn.btn-default(href='#') View details &raquo;
+					.col-lg-4
+						h2 Heading
+						p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+						p
+							a.btn.btn-default(href='#') View details &raquo;
+					.col-lg-4
+						h2 Heading
+						p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.
+						p
+							a.btn.btn-default(href='#') View details &raquo;
+		block scripts
+			<!--[if lte IE 8]>
+			script(type='text/javascript', src='/scripts/lib.legacy.js')
+			//- This is used directly because it is closely tied to the window and does not work if included with browserify.
+			script(type='text/javascript', src='/scripts/respond.min.js')
+			<![endif]-->
+			<!--[if gte IE 9]>
+			script(type='text/javascript', src='/scripts/lib.modern.js')
+			<![endif]-->
+			<![if !IE]>
+			script(type='text/javascript', src='/scripts/lib.modern.js')
+			<![endif]>
+			script(type='text/javascript', src='/scripts/app.js')

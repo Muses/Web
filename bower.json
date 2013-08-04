@@ -12,6 +12,7 @@
     "json3": "~3.2.5",
     "html5shiv": "~3.6.2",
     "es5-shim": "~2.1.0",
-    "bootstrap": "~3.0.0"
+    "bootstrap": "~3.0.0",
+    "respond": "~1.2.0"
   }
 }
