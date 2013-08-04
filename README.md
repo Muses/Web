@@ -1,6 +1,7 @@
-# Web
+# Muses Web Seed
 
-Muses Web Seed
+
+
 
 ## Setup
 
