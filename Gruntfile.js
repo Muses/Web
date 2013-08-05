@@ -12,26 +12,22 @@ module.exports = function(grunt) {
 	var layoutFiles = {
 		// Enable dynamic expansion.
 		expand: true,
-
 		// Src matches are relative to this path.
 		cwd: 'src/layouts/',
-
 		// Actual pattern(s) to match.
 		src: ['**/*.jade'],
-
 		// Destination path prefix.
 		dest: 'build/layouts/',
-
 		// Dest filepaths will have this extension.
 		ext: '.html'
 	};
 
 	/*
-	 * Use lib.legacy.js, lib.modern.js, and app.js in src/scripts to generate the corresponding build files.
+	 * Use targets/legacy.js, targets/modern.js, and app.js in src/scripts to generate the corresponding build files.
 	 */
 	var scriptFiles = {
-		'build/scripts/lib.legacy.js': 'src/scripts/lib.legacy.js',
-		'build/scripts/lib.modern.js': 'src/scripts/lib.modern.js',
+		'build/targets/legacy.js': 'src/targets/legacy.js',
+		'build/targets/modern.js': 'src/targets/modern.js',
 		'build/scripts/app.js': 'src/scripts/app.js'
 	};
 
@@ -138,8 +134,8 @@ module.exports = function(grunt) {
 			},
 			release: {
 				files: {
-					'build/scripts/lib.legacy.js': 'build/scripts/lib.legacy.js',
-					'build/scripts/lib.modern.js': 'build/scripts/lib.modern.js',
+					'build/targets/legacy.js': 'build/targets/legacy.js',
+					'build/targets/modern.js': 'build/targets/modern.js',
 					'build/scripts/app.js': 'build/scripts/app.js'
 				}
 			}
@@ -184,14 +180,13 @@ module.exports = function(grunt) {
 			},
 			// Copy Respond.js from the source directory to the build directory.
 			respond: {
-				src: 'src/scripts/respond.min.js',
-				dest: 'build/scripts/respond.min.js'
+				src: 'src/targets/legacy/respond.min.js',
+				dest: 'build/targets/legacy/respond.min.js'
 			}
 		},
 
 		// Setup the Rename/Move tasks.
 		rename: {
-
 			// Move build/layouts/index.html to build/index.html
 			'layouts/index': {
 				src: 'build/layouts/index.html',
@@ -222,7 +217,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-rename');
 
-	// Register a task to create a debug build.
+	// Register tasks for the debug and release builds.
 	grunt.registerTask('debug', ['clean', 'jade:debug', 'less:debug', 'browserify:debug', 'copy', 'rename']);
 	grunt.registerTask('release', ['clean', 'jade:release', 'less:release', 'browserify:release', 'uglify', 'copy', 'rename']);
 

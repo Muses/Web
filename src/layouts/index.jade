@@ -1,5 +1,5 @@
 doctype 5
-html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='WebApp')
+html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='mwApp')
 	head
 		block head
 			meta(charset='utf-8')
@@ -52,14 +52,14 @@ html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='WebApp')
 							a.btn.btn-default(href='#') View details &raquo;
 		block scripts
 			<!--[if lte IE 8]>
-			script(type='text/javascript', src=options.path.media + 'scripts/lib.legacy.js')
+			script(type='text/javascript', src=options.path.media + 'targets/legacy.js')
 			//- This is used directly because it is closely tied to the window and does not work if included with browserify.
-			script(type='text/javascript', src=options.path.media + 'scripts/respond.min.js')
+			script(type='text/javascript', src=options.path.media + 'targets/legacy/respond.min.js')
 			<![endif]-->
 			<!--[if gte IE 9]>
-			script(type='text/javascript', src=options.path.media + 'scripts/lib.modern.js')
+			script(type='text/javascript', src=options.path.media + 'targets/modern.js')
 			<![endif]-->
 			<![if !IE]>
-			script(type='text/javascript', src=options.path.media + 'scripts/lib.modern.js')
+			script(type='text/javascript', src=options.path.media + 'targets/modern.js')
 			<![endif]>
 			script(type='text/javascript', src=options.path.media + 'scripts/app.js')

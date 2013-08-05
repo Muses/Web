@@ -1,6 +1,6 @@
 
 // Instantiate the application module.
-var module = angular.module('WebApp', [
+var module = angular.module('mwApp', [
 	'ngResource', 'ui.state'
 ]);
 
