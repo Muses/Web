@@ -1,10 +1,10 @@
 
-module.exports = function($q) {
+module.exports = function mwLoginQueueFactory($q) {
 
 	/**
-	 * The Login Replay Queue.
+	 * The Login Queue.
 	 */
-	function LoginReplayQueue($q) {
+	function mwLoginQueue($q) {
 
 		/**
 		 * The request queue.
@@ -68,5 +68,5 @@ module.exports = function($q) {
 	}
 
 	// Instantiate a login replay queue.
-	return new LoginReplayQueue($q);
+	return new mwLoginQueue($q);
 };

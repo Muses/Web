@@ -8,14 +8,18 @@ var path = require('path');
 // Load the server module.
 var server = require('../lib/server');
 
-// Get the path to the server config path.
-var serverConfigPath = path.join(__dirname, '../etc/server.js');
-
-// Check if a server config file exists.
-if (fs.existsSync(serverConfigPath)) {
+// Check if a server dist config file exists.
+if (fs.existsSync(path.join(__dirname, '../etc/server.dist.js'))) {
 
 	// Load the server config settings and merge with defaults.
-	lodash.extend(server.options, require(serverConfigPath));
+	lodash.extend(server.options, require(path.join(__dirname, '../etc/server.dist.js')));
+}
+
+// Check if a server config file exists.
+if (fs.existsSync(path.join(__dirname, '../etc/server.js'))) {
+
+	// Load the server config settings and merge with defaults.
+	lodash.extend(server.options, require(path.join(__dirname, '../etc/server.js')));
 }
 
 // Initialize the server.

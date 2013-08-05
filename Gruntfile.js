@@ -42,15 +42,38 @@ module.exports = function(grunt) {
 		'build/styles/application.css': 'src/styles/application.less'
 	};
 
-	// Get the path to the app config.
-	var appConfigPath = path.join(__dirname, 'etc/app.js');
-	var appConfig = {};
+	// Initialize the runtime options.
+	var options = {
+		app: {},
+		path: {}
+	};
+
+	// Check if a app dist config file exists.
+	if (fs.existsSync(path.join(__dirname, 'etc/app.dist.js'))) {
+
+		// Load the app dist config settings and merge with defaults.
+		lodash.extend(options.app, require(path.join(__dirname, 'etc/app.dist.js')));
+	}
 
 	// Check if a app config file exists.
-	if (fs.existsSync(appConfigPath)) {
+	if (fs.existsSync(path.join(__dirname, 'etc/app.js'))) {
 
 		// Load the app config settings and merge with defaults.
-		lodash.extend(appConfig, require(appConfigPath));
+		lodash.extend(options.app, require(path.join(__dirname, 'etc/app.js')));
+	}
+
+	// Check if a path dist config file exists.
+	if (fs.existsSync(path.join(__dirname, 'etc/path.dist.js'))) {
+
+		// Load the path dist config settings and merge with defaults.
+		lodash.extend(options.path, require(path.join(__dirname, 'etc/path.dist.js')));
+	}
+
+	// Check if a path config file exists.
+	if (fs.existsSync(path.join(__dirname, 'etc/path.js'))) {
+
+		// Load the path config settings and merge with defaults.
+		lodash.extend(options.path, require(path.join(__dirname, 'etc/path.js')));
 	}
 
 	// Project configuration.
@@ -73,7 +96,7 @@ module.exports = function(grunt) {
 				options: {
 					pretty: true,
 					data: {
-						app: appConfig,
+						options: options,
 						debug: true
 					}
 				},
@@ -82,7 +105,7 @@ module.exports = function(grunt) {
 			release: {
 				options: {
 					data: {
-						app: appConfig,
+						options: options,
 						debug: false
 					}
 				},

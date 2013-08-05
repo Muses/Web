@@ -1,23 +1,67 @@
 
 // Instantiate the application module.
-var module = angular.module('mWeb', [
-	'ui.router'
+var module = angular.module('WebApp', [
+	'ngResource', 'ui.state'
 ]);
 
-// Register the login replay queue service.
-module.service('LoginReplayQueue', [
-	'$q', require('./login/replayqueue.js')
+// Register the config.
+module.factory('mwConfig', require('./mw/Config'));
+
+// Register the login queue.
+module.service('mwLoginQueue', [
+	'$q', require('./mw/LoginQueue')
+]);
+
+// Register the login interceptor.
+module.factory('mwLoginInterceptor', [
+	'$injector', '$q', '$rootScope', 'mwLoginQueue', require('./mw/LoginInterceptor')
+]);
+
+// Register the session service.
+module.factory('mwSession', [
+	'$resource', 'mwConfig', require('./mw/Session')
+]);
+
+// Register the identity.
+module.factory('mwIdentity', [
+	'$rootScope', 'mwSession', require('./mw/Identity')
+]);
+
+// Register the login form controller.
+module.controller('mwLoginController', [
+	'$scope', 'mwIdentity', 'mwLoginQueue', require('./mw/LoginController')
+]);
+
+// Configure $http to use the login interceptor.
+module.config([
+	'$httpProvider', function($httpProvider) {
+		$httpProvider.responseInterceptors.push('mwLoginInterceptor');
+	}
+]);
+
+// Configure the application states.
+module.config([
+	'$stateProvider', '$locationProvider', '$urlRouterProvider', 'mwConfigProvider', function($stateProvider, $locationProvider, $urlRouterProvider, mwConfigProvider)
+	{
+		// The config is not injectable yet so we have to get it from the provider.
+		var mwConfig = mwConfigProvider.$get();
+
+		// Configure the default route.
+		$urlRouterProvider.otherwise(mwConfig.path.page);
+
+		// Configure the app to use push state routing.
+		$locationProvider.html5Mode(true).hashPrefix('#');
+	}
 ]);
 
 // Setup the application runtime.
 module.run([
-	'$rootScope', '$window', function($rootScope, $window) {
+	'$rootScope', 'mwConfig', 'mwIdentity', function($rootScope, mwConfig, mwIdentity) {
 
-		// Check if there is a config callback.
-		if (angular.isFunction($window.mConfigCallback)) {
+		// Bind the application config to the root scope.
+		$rootScope.mwConfig = mwConfig;
 
-			// Bind the application settings to the root scope.
-			$rootScope.app = $window.mConfigCallback();
-		}
+		// Bind the identity to the root scope.
+		$rootScope.mwIdentity = mwIdentity;
 	}
 ]);

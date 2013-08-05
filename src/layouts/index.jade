@@ -1,16 +1,18 @@
 doctype 5
-html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='mWeb')
+html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='WebApp')
 	head
-		meta(charset='utf-8')
-		title(ng-bind='app.title')= app.title
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		link(rel='stylesheet', href='/styles/application.css')
-		link(rel='shortcut icon', href='/icons/favicon.ico')
-		script(type='text/javascript').
-			function mConfigCallback() {
-				return !{ JSON.stringify(app || {}) };
-			}
+		block head
+			meta(charset='utf-8')
+			title(ng-bind='mConfig.app.title')= options.app.title
+			meta(name='viewport', content='width=device-width, initial-scale=1.0')
+			meta(http-equiv='X-UA-Compatible', content='IE=edge')
+			link(rel='stylesheet', href=options.path.media + 'styles/application.css')
+			link(rel='shortcut icon', href=options.path.media + 'icons/favicon.ico')
+		block config
+			script(type='text/javascript').
+				function mwConfigCallback() {
+					return !{ JSON.stringify(options || {}) };
+				}
 	body
 		.container
 			block header
@@ -50,14 +52,14 @@ html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='mWeb')
 							a.btn.btn-default(href='#') View details &raquo;
 		block scripts
 			<!--[if lte IE 8]>
-			script(type='text/javascript', src='/scripts/lib.legacy.js')
+			script(type='text/javascript', src=options.path.media + 'scripts/lib.legacy.js')
 			//- This is used directly because it is closely tied to the window and does not work if included with browserify.
-			script(type='text/javascript', src='/scripts/respond.min.js')
+			script(type='text/javascript', src=options.path.media + 'scripts/respond.min.js')
 			<![endif]-->
 			<!--[if gte IE 9]>
-			script(type='text/javascript', src='/scripts/lib.modern.js')
+			script(type='text/javascript', src=options.path.media + 'scripts/lib.modern.js')
 			<![endif]-->
 			<![if !IE]>
-			script(type='text/javascript', src='/scripts/lib.modern.js')
+			script(type='text/javascript', src=options.path.media + 'scripts/lib.modern.js')
 			<![endif]>
-			script(type='text/javascript', src='/scripts/app.js')
+			script(type='text/javascript', src=options.path.media + 'scripts/app.js')
