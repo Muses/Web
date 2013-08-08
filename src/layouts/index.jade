@@ -14,7 +14,24 @@ html(lang-'en', xmlns:ng='http://angularjs.org', id='ng-app', ng-app='mwApp')
 					return !{ JSON.stringify(options || {}) };
 				}
 	body
-		.container
+		.container(ng-cloak, ng-show='mwIdentity.mustLogin')
+			block login
+				.row
+					.col-lg-6.col-offset-3
+						form(ng-controller='mwLoginController', name='form', novalidate, ng-submit='submit()')
+							fieldset
+								h2 Please sign in
+								.form-group(ng-class='{ "has-error": form.username.$invalid }')
+									label(for='login-username') Username
+									input.form-control(type='text', name='username', id='login-username', required, ng-model='credentials.username', placeholder='Username')
+									span.help-block(ng-show='form.username.$error.required') You must enter a username.
+								.form-group(ng-class='{ "has-error": form.password.$invalid }')
+									label(for='login-password') Password
+									input.form-control(type='password', name='password', id='login-password', required, ng-model='credentials.password', placeholder='Password')
+									span.help-block(ng-show='form.username.$error.required') You must enter a password.
+								button.btn.btn-primary(type='submit', ng-disabled='state.submitted') Sign in
+
+		.container(ng-cloak, ng-hide='mwIdentity.mustLogin')
 			block header
 				.row
 					.col-lg-12

@@ -24,7 +24,7 @@ module.factory('mwSession', [
 
 // Register the identity.
 module.factory('mwIdentity', [
-	'$rootScope', 'mwSession', require('./mw/Identity')
+	'$rootScope', 'mwSession', 'mwConfig', require('./mw/Identity')
 ]);
 
 // Register the login form controller.

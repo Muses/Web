@@ -1,5 +1,5 @@
 
-module.exports = function mwIdentityFactory($rootScope, mwSession)
+module.exports = function mwIdentityFactory($rootScope, mwSession, mwConfig)
 {
 	function mwIdentity()
 	{
@@ -7,14 +7,25 @@ module.exports = function mwIdentityFactory($rootScope, mwSession)
 		var keys = [];
 
 		/**
-		 * @var boolean True if the identity is a guest, false otherwise.
+		 * True if the identity is a guest, false otherwise.
+		 *
+		 * @type {Boolean}
 		 */
-		this.guest = undefined;
+		this.guest = true;
 
 		/**
-		 * @var boolean True if the identity is loaded, false otherwise.
+		 * True if the identity is loaded, false otherwise.
+		 *
+		 * @type {Boolean}
 		 */
 		this.loaded = false;
+
+		/**
+		 * True if the user must log in to proceed.
+		 *
+		 * @type {Boolean}
+		 */
+		this.mustLogin = !!mwConfig.app.login.required;
 
 		/**
 		 * Login the identity.
@@ -117,6 +128,7 @@ module.exports = function mwIdentityFactory($rootScope, mwSession)
 		{
 			self.loaded = true;
 			self.guest = true;
+			self.mustLogin = true;
 		});
 	}
 
