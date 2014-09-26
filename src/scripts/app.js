@@ -1,7 +1,7 @@
 
 // Instantiate the application module.
 var module = angular.module('mwApp', [
-	'ngResource', 'ui.state'
+	'ngResource', 'ui.router'
 ]);
 
 // Register the config.
