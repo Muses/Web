@@ -1,11 +1,16 @@
 # Muses Web Seed
 
+This is a seed project for my preferred web stack. It uses:
 
-
+* AngularJS
+* Angular UI Router.
+* Bootstrap with LESS for styling.
+* Jade for layouts.
+* Browserify for JavaScript bundling and minification.
 
 ## Setup
 
-These instructions assume you already have Node.js, NPM, and Bower installed.
+These instructions assume you already have Node.js, NPM, and Bower installed and updated to the latest stable versions.
 
 1. Clone the repository: ```git clone git@github.com:Muses/Web.git Muses-Web```
 2. Change to the repository directory: ```cd Muses-Web```
